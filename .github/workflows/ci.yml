@@ -1,0 +1,14 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        flags: ["-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_BUILD_TYPE=Debug -DPG_SANITIZE=ON"]
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y ninja-build libeigen3-dev libgtest-dev libbenchmark-dev
+      - run: cmake -S . -B build -G Ninja ${{ matrix.flags }}
+      - run: cmake --build build
+      - run: cd build && ctest --output-on-failure

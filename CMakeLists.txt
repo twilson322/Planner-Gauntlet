@@ -1,0 +1,38 @@
+cmake_minimum_required(VERSION 3.22)
+project(planner_gauntlet VERSION 1.0.0 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+option(PG_SANITIZE "AddressSanitizer + UBSan" OFF)
+option(PG_BUILD_BENCH "Build Google Benchmark targets" ON)
+add_compile_options(-Wall -Wextra -Wpedantic -Wshadow)
+if(PG_SANITIZE)
+  add_compile_options(-fsanitize=address,undefined -fno-omit-frame-pointer -g)
+  add_link_options(-fsanitize=address,undefined)
+endif()
+
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+add_library(pg src/grid.cpp src/jps.cpp src/dstar_lite.cpp src/dubins.cpp src/hybrid_astar.cpp
+               src/rrt_star.cpp src/tracking.cpp)
+target_include_directories(pg PUBLIC include)
+target_link_libraries(pg PUBLIC Eigen3::Eigen)
+
+add_executable(pg_experiments apps/pg_experiments.cpp)
+target_link_libraries(pg_experiments PRIVATE pg)
+
+if(PG_BUILD_BENCH)
+  find_package(benchmark REQUIRED)
+  add_executable(pg_bench apps/pg_bench.cpp)
+  target_link_libraries(pg_bench PRIVATE pg benchmark::benchmark)
+endif()
+
+enable_testing()
+find_package(GTest REQUIRED)
+add_executable(pg_tests tests/test_search.cpp tests/test_dstar.cpp tests/test_dubins_hybrid.cpp
+                        tests/test_rrt.cpp tests/test_tracking.cpp tests/test_grid.cpp)
+target_link_libraries(pg_tests PRIVATE pg GTest::gtest_main)
+include(GoogleTest)
+gtest_discover_tests(pg_tests)

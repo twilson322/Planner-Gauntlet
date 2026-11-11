@@ -1,0 +1,14 @@
+---------------------------------------------------------------------------------------------
+Benchmark                                   Time             CPU   Iterations UserCounters...
+---------------------------------------------------------------------------------------------
+BM_Dijkstra/512                          21.9 ms         21.6 ms           35 expansions=160.316k
+BM_Dijkstra/1024                         52.9 ms         52.8 ms           10 expansions=385.041k
+BM_AStar/512                             13.7 ms         13.7 ms           53 expansions=40.999k
+BM_AStar/1024                            78.8 ms         78.3 ms            9 expansions=225.58k
+BM_WeightedAStar3/512                   0.588 ms        0.584 ms         1061 expansions=1.851k
+BM_WeightedAStar3/1024                   35.7 ms         35.3 ms           18 expansions=116.119k
+BM_JPS/512                               1.50 ms         1.45 ms          465 expansions=316
+BM_JPS/1024                              5.35 ms         5.26 ms          133 expansions=731
+BM_DistanceTransform/512                 5.74 ms         5.73 ms           89
+BM_DistanceTransform/1024                22.2 ms         21.8 ms           33
+BM_HybridAStarParking/iterations:5        205 ms          203 ms            5

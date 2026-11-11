@@ -1,0 +1,10 @@
+search: 58 queries, 0 optimality mismatches, 0 weighted-A* bound violations
+dstar: 30 maps, 0 mismatches/failures
+hybrid full                     found=1 expansions= 14522 time=  199.5 ms length=55.4 m switches=1
+hybrid no_dubins_heuristic      found=1 expansions= 13082 time=  206.8 ms length=56.8 m switches=1
+hybrid no_holonomic_heuristic   found=1 expansions= 40568 time=  504.7 ms length=55.8 m switches=1
+hybrid no_analytic_expansion    found=1 expansions=184226 time= 1655.0 ms length=74.0 m switches=0
+hybrid forward_only             found=1 expansions= 20827 time=  154.1 ms length=75.2 m switches=0
+rrt: done (8-connected A* reference 142.65 m)
+track: done
+[all] 27.6 s

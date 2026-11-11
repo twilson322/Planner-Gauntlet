@@ -1,0 +1,6 @@
+variant,found,expansions,time_ms,length_m,direction_switches,analytic_finish
+full,1,14522,199.5,55.44,1,1
+no_dubins_heuristic,1,13082,206.8,56.76,1,1
+no_holonomic_heuristic,1,40568,504.7,55.80,1,1
+no_analytic_expansion,1,184226,1655.0,74.00,0,0
+forward_only,1,20827,154.1,75.22,0,1
